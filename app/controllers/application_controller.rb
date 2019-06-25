@@ -24,5 +24,6 @@ class ApplicationController < ActionController::API
     return unless user
     user.regenerate_token
     cookies.signed[:auth_token] = user.token
+    user
   end
 end
