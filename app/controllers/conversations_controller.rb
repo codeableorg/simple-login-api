@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   def index
-    render json: Conversation.all, status: :ok
+    conversations = Conversation.all
+    render json: conversations, include: :messages, status: :ok
   end
 end

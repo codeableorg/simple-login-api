@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  include ActionController::HttpAuthentication::Token::ControllerMethods
+  include ActionController::Cookies
 
   before_action :require_login
 
@@ -19,8 +19,6 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_token
-    authenticate_with_http_token do |token, _options|
-      User.find_by(token: token)
-    end
+    User.find_by(token: cookies.signed[:auth_token])
   end
 end
