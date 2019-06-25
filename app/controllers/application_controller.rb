@@ -19,6 +19,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_token
+    Rails.logger.debug 'token' + cookies.signed[:auth_token]
     User.find_by(token: cookies.signed[:auth_token])
   end
 end
